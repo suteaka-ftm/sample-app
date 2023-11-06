@@ -4,7 +4,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-if [ $1 != "server" ] && [ $1 != "client" ]; then
+if [ $1 != "server" ] && [ $1 != "grpc-web" ]; then
     echo "引数にserver, clientのいずれかを指定してください"
     exit 1
 fi
