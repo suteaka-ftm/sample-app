@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  proto-client:
+    build:
+      context: ./protos
+    container_name: proto-client
+    volumes:
+      - ./protos:/app
+      - ./server/protobuf:/app/protobuf/helloworld
+  server:
+    build:
+      context: ./server
+    container_name: server
+    ports:
+      - 50051:50051
+    hostname: server.local
+    volumes:
+      - ./server:/app
+  grpc-web:
+    build:
+      context: ./grpc-web
+    container_name: grpc-web
+    ports:
+      - 8080:8080
+    volumes:
+      - ./grpc-web:/app
+  envoy:
+    build:
+      context: ./envoy
+    container_name: envoy
+    ports:
+      - 8081:8081
+    volumes:
+      - ./envoy:/app
+
