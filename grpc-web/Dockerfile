@@ -1,19 +1,14 @@
-# Node.js 14をベースイメージとして使用
-FROM node:14
+FROM node:16.11.1-bullseye-slim
 
-# 作業ディレクトリを/appに設定
 WORKDIR /app
 
-# クライアントコードと依存関係をコピー
-# COPY package.json package-lock.json ./
-COPY index.html ./
-COPY protobuf ./
+COPY . .
 
-# 依存関係をインストール
 RUN npm install
+RUN npx webpack app.js --mode development
 
-# ポート8080を公開
-EXPOSE 8080
+RUN npm install -g http-server
 
-# アプリケーションを起動
-CMD ["npm", "start"]
+EXPOSE 3000
+
+CMD ["http-server", "-p", "3000"]

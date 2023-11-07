@@ -25,8 +25,6 @@ static_resources:
                         route:
                           cluster: echo_service
                           timeout: 0s
-                          max_stream_duration:
-                            grpc_timeout_header_max: 0s
                     cors:
                       allow_origin_string_match:
                         - prefix: "*"
@@ -57,5 +55,5 @@ static_resources:
             - endpoint:
                 address:
                   socket_address:
-                    address: node-server
-                    port_value: 9090
+                    address: server.local
+                    port_value: 50051

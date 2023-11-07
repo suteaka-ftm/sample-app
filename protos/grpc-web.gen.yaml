@@ -4,5 +4,8 @@ plugins:
     out: protobuf/helloworld
     opt:
       - mode=grpcwebtext
+      - import_style=commonjs
   - plugin: buf.build/protocolbuffers/js
     out: protobuf/helloworld
+    opt:
+      - import_style=commonjs

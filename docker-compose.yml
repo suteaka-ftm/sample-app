@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 services:
   proto-server:
     build:
@@ -28,12 +28,12 @@ services:
       context: ./grpc-web
     container_name: grpc-web
     ports:
-      - 8080:8080
+      - 3000:3000
     volumes:
       - ./grpc-web:/app
-  # envoy:
-  #   build:
-  #     context: ./envoy
-  #   container_name: envoy
-  #   ports:
-  #     - 9000:9000
+  envoy:
+    build:
+      context: ./envoy
+    container_name: envoy
+    ports:
+      - 8080:8080

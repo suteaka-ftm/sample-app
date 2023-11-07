@@ -1,24 +1,16 @@
-// grpc-web　app
+const {HelloRequest, HelloReply} = require('./protobuf/helloworld_pb.js');
+const {GreeterClient} = require('./protobuf/helloworld_grpc_web_pb.js');
 
-import { GreeterClient } from './protobuf/helloworld_grpc_web_pb.js';
-import { HelloRequest } from './protobuf/helloworld_pb.js';
+const client = new GreeterClient('http://localhost:8080');
 
-var client = new GreeterClient('server.local:50051');
+const request = new HelloRequest();
+request.setName('World');
 
-// on click event
-var button = document.getElementById('button');
-button.onclick = () => {
-  var request = new HelloRequest();
-  var input = document.getElementById('input');
-  request.setName(input.value);
+client.sayHello(request, {}, (err, response) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
 
-  client.sayHello(request, {}, (err, response) => {
-    document.getElementById('output').innerHTML = response.getMessage();
-  });
-
-  // add h3 tag with response message
-  var h3 = document.createElement('h3');
-  h3.innerHTML = response.getMessage();
-
-  document.getElementById('output').appendChild(h3);
-};
+  console.log(response.getMessage());
+});
