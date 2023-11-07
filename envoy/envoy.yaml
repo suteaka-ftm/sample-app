@@ -7,7 +7,7 @@ static_resources:
   listeners:
     - name: listener_0
       address:
-        socket_address: { address: 0.0.0.0, port_value: 8080 }
+        socket_address: { address: 0.0.0.0, port_value: 8080 }  # envoy proxy port
       filter_chains:
         - filters:
           - name: envoy.filters.network.http_connection_manager
@@ -57,5 +57,5 @@ static_resources:
             - endpoint:
                 address:
                   socket_address:
-                    address: server.local
-                    port_value: 50051
+                    address: server.local # grpc server address
+                    port_value: 50051     # grpc server port

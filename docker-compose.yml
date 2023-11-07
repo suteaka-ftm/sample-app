@@ -1,8 +1,9 @@
-version: '3.9'
+version: "3.9"
 services:
   proto-server:
     build:
       context: ./protos
+      dockerfile: ./server/Dockerfile
     container_name: proto-server
     volumes:
       - ./protos:/app
@@ -10,10 +11,11 @@ services:
   proto-client:
     build:
       context: ./protos
+      dockerfile: ./client/Dockerfile
     container_name: proto-client
     volumes:
       - ./protos:/app
-      - ./grpc-web/protobuf:/app/protobuf/helloworld
+      - ./grpc-web/src/protobuf:/app/protobuf/helloworld
   server:
     build:
       context: ./server
@@ -28,12 +30,11 @@ services:
       context: ./grpc-web
     container_name: grpc-web
     ports:
-      - 8080:8080
+      - 5173:5173
     volumes:
       - ./grpc-web:/app
-  # envoy:
-  #   build:
-  #     context: ./envoy
-  #   container_name: envoy
-  #   ports:
-  #     - 9000:9000
+  envoy:
+    build:
+      context: ./envoy
+    container_name: envoy
+    hostname: envoy.local

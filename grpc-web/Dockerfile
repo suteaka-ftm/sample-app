@@ -1,14 +1,11 @@
-FROM node:14
+FROM node:21-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY . /app
 
-# 依存関係をインストール
-RUN npm install -g http-server
+RUN npm install
 
-# ポート8080を公開
-EXPOSE 8080
+EXPOSE 5173
 
-# アプリケーションを起動
-CMD ["http-server", "-p", "8080"]
+CMD ["npm", "run", "dev"]
